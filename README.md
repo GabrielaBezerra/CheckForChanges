@@ -16,8 +16,11 @@ chmod +x check-for-changes
 
 
 ### Usage
-
+```
 ./check-for-changes "\<url\>" "\<message\>" \<interval of update in seconds\>
+```
 
 #### Example
+```
 ./check-for-changes "apple.com" "Hey, Apple site changed!" 5
+```
