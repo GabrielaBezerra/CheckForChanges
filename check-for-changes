@@ -1,0 +1,43 @@
+#!/bin/bash
+
+clear;
+figlet "Observe Changes";
+
+if [[ -z $1 || -z $2 ]]; then
+	echo " usage: ./check <url> \"message\" interval"
+else 
+
+	interval=10
+	if [ ! -z $3 ]; then
+		interval=$3
+	fi
+
+	while :
+	do
+		current=`curl $1`;
+
+		if [ ! -f previous.html ]; then
+			echo -e "Writing File";
+       			mkdir -p "`dirname \"previous.html\"`" 2>/dev/null
+			echo "$current" >> "previous.html"
+		fi
+
+		previous="`cat previous.html`";
+
+		current_count=`echo -e "$current" | wc -l`
+		previous_count=`echo -e "$previous" | wc -l`
+		
+		echo -e "\n$current_count\tvs. $previous_count" ;
+
+		if [ "$previous_count" = "$current_count" ]; then
+			echo -e "\n****************************************\n$(date)\nNothing New...\n****************************************\n"
+			sleep $interval
+		else
+			echo -e "\n****************************************\n$(date)\nNew Content!\n****************************************\n"
+			say $2;
+			break;
+		fi
+
+	done
+
+fi
