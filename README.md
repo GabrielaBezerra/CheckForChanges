@@ -27,5 +27,5 @@ chmod +x check-for-changes
 
 #### Example
 ```
-./check-for-changes "apple.com" "Hey, Apple site changed!" 5
+./check-for-changes "https://www.apple.com" "Hey, Apple site changed\!" 5
 ```
