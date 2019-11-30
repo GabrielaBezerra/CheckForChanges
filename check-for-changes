@@ -1,12 +1,12 @@
 #!/bin/bash
 
 clear;
-figlet "Check For Changes";
 
 if [[ -z $1 || -z $2 ]]; then
 	echo " usage: ./check \"<url>\" \"<message>\" [interval]"
 else 
-
+	figlet "Check For Changes";
+	
 	interval=10
 	if [ ! -z $3 ]; then
 		interval=$3
