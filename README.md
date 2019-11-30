@@ -1,15 +1,20 @@
 # Check For Changes
 
-Simple Bash script for checking if a website has been updated. 
+Simple Bash script for checking if a website has been updated. Since it uses "say" script to notify changes on the specified website, I guess it will only work properly on macOS. I'm going to check/improve that soon.
 
-### Configuration
+### Setup
 
 Clone this repository, or copy/save the raw file.
 ```
 git clone https://github.com/GabrielaBezerra/CheckForChanges.git
 ```
 
-Make it executable.
+Install figlet
+```
+brew install figlet
+```
+
+Make the script executable.
 ```
 chmod +x check-for-changes
 ```
@@ -17,7 +22,7 @@ chmod +x check-for-changes
 
 ### Usage
 ```
-./check-for-changes "<url>" "<message>" <interval of update in seconds>
+./check-for-changes "<url>" "<message>" [<interval of update in seconds>]
 ```
 
 #### Example
