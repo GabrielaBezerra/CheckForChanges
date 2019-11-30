@@ -1,15 +1,19 @@
 #!/bin/bash
 
 clear;
-figlet "Observe Changes";
+figlet "Check For Changes";
 
 if [[ -z $1 || -z $2 ]]; then
-	echo " usage: ./check <url> \"message\" interval"
+	echo " usage: ./check \"<url>\" \"<message>\" interval"
 else 
 
 	interval=10
 	if [ ! -z $3 ]; then
 		interval=$3
+	fi
+	
+	if [ -f previous.html ]; then 
+		rm previous.html
 	fi
 
 	while :
@@ -17,7 +21,7 @@ else
 		current=`curl $1`;
 
 		if [ ! -f previous.html ]; then
-			echo -e "Writing File";
+			echo -e "\nWriting in previous.html";
        			mkdir -p "`dirname \"previous.html\"`" 2>/dev/null
 			echo "$current" >> "previous.html"
 		fi
@@ -35,6 +39,7 @@ else
 		else
 			echo -e "\n****************************************\n$(date)\nNew Content!\n****************************************\n"
 			say $2;
+			rm previous.html;
 			break;
 		fi
 
