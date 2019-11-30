@@ -4,7 +4,7 @@ clear;
 figlet "Check For Changes";
 
 if [[ -z $1 || -z $2 ]]; then
-	echo " usage: ./check \"<url>\" \"<message>\" interval"
+	echo " usage: ./check \"<url>\" \"<message>\" [interval]"
 else 
 
 	interval=10
