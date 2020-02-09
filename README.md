@@ -9,11 +9,6 @@ Clone this repository, or copy/save the raw file.
 git clone https://github.com/GabrielaBezerra/CheckForChanges.git
 ```
 
-Install figlet
-```
-brew install figlet
-```
-
 Make the script executable.
 ```
 chmod +x check-for-changes
