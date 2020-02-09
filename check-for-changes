@@ -1,11 +1,60 @@
 #!/bin/bash
 
+
+
 if [[ -z $1 || -z $2 ]]; then
 	echo " usage: ./check \"<url>\" \"<message>\" [interval]"
 else 
 	clear;
-	figlet "Check For Changes";
+
+
+chmod +x .
+
+sleep 0.2
+
+./banner.sh
+
+sleep 0.3
+
+
+while [ : ]
+do
+    echo -ne "\n Check for changes" '|\r'
+    sleep 0.4
+    echo -ne "cHeck for changes" '/\r'
+    sleep 0.4
+    echo -ne "chEck for changes" '一\r'
+    sleep 0.4
+    echo -ne "cheCk for changes" '\\ \r'
+    sleep 0.4
+    echo -ne "checK for changes" '|\r'
+    sleep 0.4
+    echo -ne "check For changes" '$\r'
+    sleep 0.4
+
+    echo -ne "check fOr changes" '|\r'
+    sleep 0.3
+    echo -ne "cHeck foR changes" '/\r'
+    sleep 0.3
+    echo -ne "check for Changes" '一\r'
+    sleep 0.3
+    echo -ne "check for cHanges" '\\ \r'
+    sleep 0.3
+    echo -ne "check for chAnges" '|\r'
+    sleep 0.3
+    echo -ne "check For chaNges" '$\r'
+    sleep 0.3
+    
+    echo -ne "check for chanGes" '|\r'
+    sleep 0.3
+    echo -ne "check for changEs" '/\r'
+    sleep 0.3
+    echo -ne "check for ChangeS" '一\r'
+    sleep 0.3
+    break;
+done
 	
+
 	interval=10
 	if [ ! -z $3 ]; then
 		interval=$3
@@ -20,7 +69,7 @@ else
 		current=`curl $1`;
 
 		if [ ! -f previous.html ]; then
-			echo -e "\nWriting in previous.html";
+			echo -e "\n Writing in previous.html";
        			mkdir -p "`dirname \"previous.html\"`" 2>/dev/null
 			echo "$current" >> "previous.html"
 		fi
@@ -35,6 +84,10 @@ else
 		if [ "$previous_count" = "$current_count" ]; then
 			echo -e "\n****************************************\n$(date)\nNothing New...\n****************************************\n"
 			sleep $interval
+			clear;
+
+			./banner.sh
+			echo -e "\n"
 		else
 			echo -e "\n****************************************\n$(date)\nNew Content!\n****************************************\n"
 			say $2;
