@@ -1,5 +1,18 @@
 #!/bin/bash
 
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  if ! command -v say &> /dev/null
+  then
+      echo "say could not be found, make sure it is installed and try again."
+      exit
+  fi
+elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
+  if ! command -v espeak &> /dev/null
+  then
+      echo "espeak could not be found, make sure it is installed and try again."
+      exit
+  fi
+fi
 
 
 if [[ -z $1 || -z $2 ]]; then
@@ -9,6 +22,7 @@ else
 
 
 chmod +x .
+
 
 sleep 0.2
 
@@ -49,7 +63,7 @@ do
     sleep 0.3
     echo -ne "check for changEs" '/\r'
     sleep 0.3
-    echo -ne "check for ChangeS" '一\r'
+    echo -ne "check for ChangeS" '一\r\n'
     sleep 0.3
     break;
 done
@@ -60,26 +74,26 @@ done
 		interval=$3
 	fi
 	
-	if [ -f previous.html ]; then 
-		rm previous.html
+	if [ -f /tmp/previous.html ]; then
+		rm /tmp/previous.html
 	fi
 
 	while :
 	do
-		current=`curl $1`;
+		current=`curl $1 2> /dev/null`;
 
-		if [ ! -f previous.html ]; then
-			echo -e "\n Writing in previous.html";
-       			mkdir -p "`dirname \"previous.html\"`" 2>/dev/null
-			echo "$current" >> "previous.html"
+		if [ ! -f /tmp/previous.html ]; then
+			echo -e "\n Writing in /tmp/previous.html";
+       			mkdir -p "`dirname \"/tmp/previous.html\"`" 2>/dev/null
+			echo "$current" >> "/tmp/previous.html"
 		fi
 
-		previous="`cat previous.html`";
+		previous="`cat /tmp/previous.html`";
 
 		current_count=`echo -e "$current" | wc -l`
 		previous_count=`echo -e "$previous" | wc -l`
 		
-		echo -e "\n$current_count\tvs. $previous_count" ;
+		echo -e "\t$current_count vs. $previous_count" ;
 
 		if [ "$previous_count" = "$current_count" ]; then
 			echo -e "\n****************************************\n$(date)\nNothing New...\n****************************************\n"
@@ -90,11 +104,16 @@ done
 			echo -e "\n"
 		else
 			echo -e "\n****************************************\n$(date)\nNew Content!\n****************************************\n"
-			say $2;
-			rm previous.html;
+
+			if [[ "$OSTYPE" == "darwin"* ]]; then
+        say $2;
+
+      elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
+        espeak $2;
+      fi
 			break;
 		fi
-
 	done
-
 fi
+
+rm /tmp/previous.html;
