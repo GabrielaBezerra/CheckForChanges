@@ -1,6 +1,11 @@
 # Check For Changes
 
-Simple Bash script for checking if a website has been updated. Since it uses "say" script to notify changes on the specified website, I guess it will only work properly on macOS. I'm going to check/improve that soon.
+Simple Bash script for checking if a website has been updated. It's currently working on MacOS and Linux!
+
+MacOS version uses `say` command to make the computer speak when the website has changed, while Linux uses `espeak`.
+
+Thanks @NirvadoX for implementing a linux version 🐧 🎉
+
 
 ### Setup
 
